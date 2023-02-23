@@ -3,12 +3,15 @@ import javax.crypto.KeyGenerator;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SecretKey;
 import java.security.NoSuchAlgorithmException;
+import java.util.Arrays;
 
 public class Encrypt {
 
     KeyGenerator keyGenerator = KeyGenerator.getInstance("DES");
     SecretKey key = keyGenerator.generateKey();
     Cipher cipher = Cipher.getInstance("DES");
+
+
     public Encrypt() throws NoSuchAlgorithmException, NoSuchPaddingException {
     }
 
@@ -18,26 +21,23 @@ public class Encrypt {
             byte[] bytesText = text.getBytes("UTF8");
             this.cipher.init(Cipher.ENCRYPT_MODE, this.key);
             bytesEncrypted = this.cipher.doFinal(bytesText);
-            System.out.println(bytesEncrypted);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+        System.out.println(Arrays.toString(bytesEncrypted));
         return new String(bytesEncrypted);
     }
-
+//
     public String Decrypting(String text){
         byte[] bytesDecrypted;
         try {
             byte[] bytesText = text.getBytes("UTF8");
-            System.out.println(bytesText);
-            this.cipher.init(Cipher.ENCRYPT_MODE, this.key);
-            byte[] bytesEncrypted = this.cipher.doFinal(bytesText);
-            this.cipher.init(Cipher.DECRYPT_MODE, this.key);
-            bytesDecrypted = this.cipher.doFinal(bytesEncrypted);
-            System.out.println(bytesDecrypted);
+//            System.out.println(Arrays.toString(bytesText));
+//            this.cipher.init(Cipher.DECRYPT_MODE, this.key);
+//            bytesDecrypted = this.cipher.doFinal(bytesText);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-        return new String(bytesDecrypted);
+        return new String("test");
     }
 }
